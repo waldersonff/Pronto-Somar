@@ -1,12 +1,57 @@
+
 const API_BASE = '/api';
 
 let produtos = [];
 let vendas = [];
 let licitacoes = [];
 let chartVendas, chartCategorias;
+let isLoading = false;
+
+// LocalStorage keys
+const STORAGE_KEYS = {
+  produtos: 'pronto_somar_produtos',
+  vendas: 'pronto_somar_vendas',
+  licitacoes: 'pronto_somar_licitacoes'
+};
+
+// LocalStorage functions
+const saveToLocalStorage = (key, data) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(data));
+  } catch (err) {
+    console.error('Error saving to localStorage:', err);
+  }
+};
+
+const loadFromLocalStorage = (key) => {
+  try {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : [];
+  } catch (err) {
+    console.error('Error loading from localStorage:', err);
+    return [];
+  }
+};
+
+const setLoading = (loading) => {
+  isLoading = loading;
+  const loader = document.getElementById('loading-spinner');
+  if (loader) {
+    loader.style.display = loading ? 'flex' : 'none';
+  }
+};
 
 async function loadData() {
+  // Load from localStorage first for immediate display
+  produtos = loadFromLocalStorage(STORAGE_KEYS.produtos);
+  vendas = loadFromLocalStorage(STORAGE_KEYS.vendas);
+  licitacoes = loadFromLocalStorage(STORAGE_KEYS.licitacoes);
+  updateProductOptions();
+  renderAll();
+
+  // Then sync with backend
   try {
+    setLoading(true);
     const [prodRes, vendRes, licRes] = await Promise.all([
       fetch(`${API_BASE}/produtos`),
       fetch(`${API_BASE}/vendas`),
@@ -17,8 +62,15 @@ async function loadData() {
     licitacoes = await licRes.json();
     updateProductOptions();
     renderAll();
+    // Save to localStorage after successful sync
+    saveToLocalStorage(STORAGE_KEYS.produtos, produtos);
+    saveToLocalStorage(STORAGE_KEYS.vendas, vendas);
+    saveToLocalStorage(STORAGE_KEYS.licitacoes, licitacoes);
   } catch (err) {
-    console.error('Error loading data:', err);
+    console.error('Error syncing with backend:', err);
+    // Keep localStorage data if backend fails
+  } finally {
+    setLoading(false);
   }
 }
 
@@ -312,6 +364,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateLogoStyle();
   loadData();
+
+  // Set default active section to dashboard
+  document.getElementById('nav-dashboard').click();
 });
 
 const openModal = (modalId) => {
@@ -404,7 +459,7 @@ async function handleProdutoSubmit(event) {
       produtos.push(newItem);
       renderAll();
     }
-    await loadData();
+    saveToLocalStorage(STORAGE_KEYS.produtos, produtos);
     closeModal('modal-produtos');
   } catch (err) {
     console.error(err);
@@ -483,7 +538,7 @@ async function handleVendaSubmit(event) {
       const newItem = await res.json();
       vendas.push(newItem);
     }
-    await loadData();
+    saveToLocalStorage(STORAGE_KEYS.vendas, vendas);
     closeModal('modal-vendas');
   } catch (err) {
     console.error(err);
@@ -550,7 +605,7 @@ async function handleLicitacaoSubmit(event) {
       licitacoes.push(newItem);
       renderAll();
     }
-    await loadData();
+    saveToLocalStorage(STORAGE_KEYS.licitacoes, licitacoes);
     closeModal('modal-licitacoes');
   } catch (err) {
     console.error(err);

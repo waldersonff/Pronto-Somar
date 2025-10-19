@@ -8,12 +8,19 @@ app.use(express.json());
 app.use(express.static('../frontend'));
 
 // Create a new pool instance for connecting to the database
+console.log('DATABASE_URL:', process.env.DATABASE_URL);
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   // Render requires SSL for external connections
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+});
+
+pool.on('connect', () => {
+  console.log('Database pool connected');
+});
+
+pool.on('error', (err) => {
+  console.error('Database pool error:', err);
 });
 
 // Function to set up the database tables
@@ -83,8 +90,10 @@ setupDatabase().then(() => {
 
 // Produtos
 app.get('/api/produtos', async (req, res) => {
+  console.log('GET /api/produtos called');
   try {
     const { rows } = await pool.query('SELECT * FROM produtos ORDER BY id ASC');
+    console.log('Sending', rows.length, 'produtos');
     res.json(rows);
   } catch (err) {
     console.error(err);
@@ -135,10 +144,12 @@ app.delete('/api/produtos/:id', async (req, res) => {
 
 // Vendas
 app.get('/api/vendas', async (req, res) => {
+  console.log('GET /api/vendas called');
   try {
     const { rows } = await pool.query(
       'SELECT v.*, p.nome as produto_nome FROM vendas v LEFT JOIN produtos p ON v.id_produto = p.id ORDER BY v.id ASC'
     );
+    console.log('Sending', rows.length, 'vendas');
     res.json(rows);
   } catch (err) {
     console.error(err);
@@ -236,8 +247,10 @@ app.delete('/api/vendas/:id', async (req, res) => {
 
 // Licitações
 app.get('/api/licitacoes', async (req, res) => {
+  console.log('GET /api/licitacoes called');
   try {
     const { rows } = await pool.query('SELECT * FROM licitacoes ORDER BY id ASC');
+    console.log('Sending', rows.length, 'licitacoes');
     res.json(rows);
   } catch (err) {
     console.error(err);
