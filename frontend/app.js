@@ -1,5 +1,5 @@
 
-const API_BASE = '/api';
+const API_BASE = 'https://pronto-somar.onrender.com/api';
 
 let produtos = [];
 let vendas = [];
