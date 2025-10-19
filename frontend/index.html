@@ -193,61 +193,7 @@
 
     <div id="modal-vendas" class="modal-backdrop fixed inset-0 flex items-center justify-center hidden opacity-0"><div class="modal-content bg-white w-full max-w-lg p-8 rounded-xl shadow-2xl transform scale-95 opacity-0"><h3 class="text-2xl font-bold mb-6 text-gray-800 flex items-center"><i class="fas fa-shopping-cart text-green-500 mr-3" aria-hidden="true"></i>Registrar Venda</h3><form id="form-venda" class="space-y-4"><input type="hidden" name="id"><div><label class="block text-sm font-medium text-gray-700">Cliente</label><input type="text" name="cliente" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-green-500 focus:border-green-500" required><div id="error-cliente" class="error-message" style="display: none;"></div></div><div><label class="block text-sm font-medium text-gray-700">Produto</label><select name="id_produto" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-green-500 focus:border-green-500" required><div id="error-id_produto" class="error-message" style="display: none;"></div></select></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-sm font-medium text-gray-700">Quantidade</label><input type="number" name="quantidade" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-green-500 focus:border-green-500" required min="1"><div id="error-quantidade" class="error-message" style="display: none;"></div></div><div><label class="block text-sm font-medium text-gray-700">Data da Venda</label><input type="date" name="data" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-green-500 focus:border-green-500" required><div id="error-data" class="error-message" style="display: none;"></div></div></div><div class="flex justify-end pt-6 space-x-3"><button type="button" onclick="closeModal('modal-vendas')" class="bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors">Cancelar</button><button type="button" onclick="clearForm('form-venda')" class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-600 transition-colors">Limpar</button><button type="submit" class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition-colors">Salvar</button></div></form></div></div>
 
-    <div id="modal-licitacoes" class="modal-backdrop fixed inset-0 flex items-center justify-center hidden opacity-0">
-        <div class="modal-content bg-white w-full max-w-lg p-8 rounded-xl shadow-2xl transform scale-95 opacity-0">
-            <h3 class="text-2xl font-bold mb-6 text-gray-800 flex items-center">
-                <i class="fas fa-gavel text-green-500 mr-3" aria-hidden="true"></i>Adicionar Licitação
-            </h3>
-            <form id="form-licitacao" class="space-y-4">
-                <input type="hidden" name="id">
-                <div>
-                    <input type="text" name="numero_licitacao" id="numero_licitacao"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-green-500 focus:border-green-500"
-                        required title="Digite o número da licitação" placeholder="Ex: 12345/2024">
-                    <div id="error-numero_licitacao" class="error-message hidden"></div>
-                </div>
-                </div>
-                <div>
-                    <input type="text" name="orgao_publico" id="orgao_publico"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-green-500 focus:border-green-500"
-                        required title="Digite o nome do órgão público" placeholder="Ex: Prefeitura Municipal">
-                    <div id="error-orgao_publico" class="error-message hidden"></div>
-                </div>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <input type="number" step="0.01" name="valor_estimado" id="valor_estimado"
-                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-green-500 focus:border-green-500"
-                            required title="Digite o valor estimado" placeholder="Ex: 10000.00">
-                        <div id="error-valor_estimado" class="error-message hidden"></div>
-                    </div>
-                    </div>
-                    <div>
-                        <input type="date" name="data_abertura" id="data_abertura"
-                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-green-500 focus:border-green-500"
-                            required title="Selecione a data de abertura" placeholder="Selecione a data">
-                        <div id="error-data_abertura" class="error-message                    </div>
-                </div>
-                <div>
-                    <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                    <select name="status" id="status"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-green-500 focus:border-green-500"
-                        title="Selecione o status da licitação" aria-label="Status da licitação">
-                        <option>Ganha</option>
-                        <option>Perdida</option>
-                        <option>Em Análise</option>
-                        <option>Em Aberto</option>
-                    </select>
-                </div>
-                <div class="flex justify-end pt-6 space-x-3">
-                    <button type="button" onclick="closeModal('modal-licitacoes')" class="bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors">Cancelar</button>
-                    <button type="button" onclick="clearForm('form-licitacao')" class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-600 transition-colors">Limpar</button>
-                    <button type="submit" class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition-colors">Salvar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
+    <div id="modal-licitacoes" class="modal-backdrop fixed inset-0 flex items-center justify-center hidden opacity-0"><div class="modal-content bg-white w-full max-w-lg p-8 rounded-xl shadow-2xl transform scale-95 opacity-0"><h3 class="text-2xl font-bold mb-6 text-gray-800 flex items-center><i class="fas fa-gavel text-green-500 mr-3" aria-hidden="true"></i>Adicionar Licitação</h3><form id="form-licitacao" class="space-y-4"><input type="hidden" name="id"><div><label class="block text-sm font-medium text-gray-700">Número da Licitação</label><input type="text" name="numero" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-green-500 focus:border-green-500" required></div><div><label class="block text-sm font-medium text-gray-700">Órgão Público</label><input type="text" name="orgao_publico" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-green-500 focus:border-green-500" required></div><div><label class="block text-sm font-medium text-gray-700">Valor Estimado (R$)</label><input type="number" step="0.01" name="valor_estimado" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-green-500 focus:border-green-500" required></div><div class="grid grid-cols-2 gap-4"><div><label class="block text  -sm font-medium text-gray-700">Data de Abertura</label><input type="date" name="data_abertura" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-green-500 focus:border-green-500" required></div><div><label class="block text-sm font-medium text-gray-700">Status</label><select name="status" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-green-500 focus:border-green-500"><option>Ganha</option><option>Perdida</option><option>Em Análise</option><option>Em Aberto</option></select></div></div><div class="flex justify-end pt-6 space-x-3"><button type="button" onclick="closeModal('modal-licitacoes')" class="bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors">Cancelar</button><button type="button" onclick="clearForm('form-licitacao')" class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-600 transition-colors">Limpar</button><button type="submit" class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition-colors">Salvar</button></div></form></div></div>
     <script src="app.js"></script>
 </body>
 </html>
