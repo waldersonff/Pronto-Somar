@@ -1,0 +1,278 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    background-attachment: fixed;
+    transition: opacity 0.3s ease;
+    position: relative;
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 25% 25%, rgba(34, 197, 94, 0.05) 0%, transparent 50%),
+                      radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+.modal-content {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    animation: moalSlideIn 0.3s ease-out;
+}
+@keyframes modalSlideIn {
+    from {
+        transform: scale(0.95) translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+.sidebar-link.active {
+    background: linear-gradient(135deg, #059669, #047857);
+    color: white;
+    box-shadow: 0 4px 15px -5px rgba(5, 150, 105, 0.6);
+    transform: translateX(5px);
+    border-left: 4px solid #10b981;
+}
+.sidebar-link:not(.active):hover {
+    background-color: rgba(55, 65, 81, 0.8); /* gray-700 with opacity */
+    transform: translateX(2px);
+    color: #e5e7eb;
+}
+.sidebar-link {
+    transition: all 0.3s ease;
+    border-radius: 0.5rem;
+    margin: 0.25rem 0.5rem;
+}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
+.data-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.data-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1);
+}
+.dashboard-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 4px 6px -1px rgba(0,0,0,0.06);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(22, 163, 74, 0.1);
+}
+
+.dashboard-card-text {
+    color: #4b5563;
+}
+
+.dashboard-card-content {
+    word-break: break-all;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15), 0 8px 16px -4px rgba(0,0,0,0.1), 0 0 20px rgba(22, 163, 74, 0.3);
+    background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+}
+
+.dashboard-card .icon-container {
+    transition: transform 0.3s ease;
+}
+
+.dashboard-card:hover .icon-container {
+    transform: scale(1.1);
+}
+
+/* Stagger Animation for Dashboard Cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0; /* Start hidden */
+}
+
+.delay-0 { animation-delay: 0s; }
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+
+/* Ripple Effect for Buttons */
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+.btn-ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-ripple::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-ripple:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Enhanced Button Hovers */
+.btn-enhanced:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Table Row Hover */
+tbody tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+tr:hover {
+    background-color: #e5e7eb;
+    transform: scale(1.01);
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Floating Labels */
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    position: absolute;
+    left: 2.5rem;
+    top: 0.75rem;
+    color: #4b5563;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    background: white;
+    padding: 0 0.25rem;
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group select:focus + label,
+.form-group select:not([value=""]) + label {
+    top: -0.5rem;
+    font-size: 0.75rem;
+    color: #16a34a;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #16a34a;
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+}
+
+/* Form Validation Styles */
+.input-error {
+    border-color: #ef4444; /* red-500 */
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.input-success {
+    border-color: #22c55e; /* green-500 */
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+.error-message {
+    color: #ef4444;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.success-message {
+    color: #166534;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Glassmorphism Effect */
+.glassmorphism {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .dashboard-card {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .sidebar {
+        width: 5rem;
+    }
+
+    .sidebar span, #sidebar-title, #sidebar-footer-text {
+        display: none;
+    }
+
+    .sidebar-link {
+        justify-content: center;
+    }
+
+    .main-content {
+        margin-left: 5rem;
+    }
+
+    .page-header {
+        padding: 1rem;
+    }
+
+    .modal-content {
+        width: 90%;
+        max-width: none;
+    }
+
+    table {
+        font-size: 0.875rem;
+    }
+
+    th, td {
+        padding: 0.5rem;
+    }
+}               
+
